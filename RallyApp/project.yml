@@ -1,0 +1,38 @@
+# Fichier XcodeGen : génère RallyApp.xcodeproj en une commande.
+#   brew install xcodegen   (une seule fois)
+#   cd RallyApp && xcodegen generate
+# Puis ouvrir RallyApp.xcodeproj dans Xcode et lancer sur un simulateur iOS.
+#
+# Tu peux aussi ignorer XcodeGen et créer un projet "App" à la main dans Xcode,
+# puis glisser le dossier Sources/ dedans (voir README).
+
+name: RallyApp
+options:
+  bundleIdPrefix: com.rally.preview
+  deploymentTarget:
+    iOS: "17.0"
+
+targets:
+  RallyApp:
+    type: application
+    platform: iOS
+    sources:
+      - Sources
+    info:
+      path: Sources/Info.plist
+      properties:
+        UILaunchScreen: {}
+        CFBundleDisplayName: Rally
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.rally.preview.app
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+
+  RallyAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests
+    dependencies:
+      - target: RallyApp
